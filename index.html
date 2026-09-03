@@ -2,6 +2,21 @@
 <!DOCTYPE html>
 <html lang="id">
 	<head>
+		<script>
+			(function () {
+				var redirect = sessionStorage.getItem('redirect');
+				
+				if (redirect) {
+					sessionStorage.removeItem('redirect');
+					
+					window.history.replaceState(
+					null,
+					'',
+					redirect
+					);
+				}
+			})();
+		</script>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<title>PrintPro POS - POS Percetakan</title>
@@ -54,23 +69,6 @@
 					}
 					} catch (e) {
 					// Suppress safely
-				}
-			})();
-		</script>
-		<script>
-			(function () {
-				const redirect = sessionStorage.redirect;
-				
-				if (redirect) {
-					delete sessionStorage.redirect;
-					
-					const url = new URL(redirect, window.location.origin);
-					
-					window.history.replaceState(
-					null,
-					'',
-					url.pathname + url.search + url.hash
-					);
 				}
 			})();
 		</script>
